@@ -18,7 +18,8 @@ because the Orders table is the one that ties the Customer table to the OrderDet
 SELECT CustomerName, OrderDetailID 
 FROM Customers AS c 
 JOIN  orders AS o  ON c.CustomerID=o.CustomerID 
-JOIN orderDetails AS od ON o.orderID=od.orderID;
+JOIN orderDetails AS od ON o.orderID=od.orderID
+ORDER BY c.CustomerName;;
 
 3. Extend the previous query to join the Products table.  You are now joining the Customers, Orders,
 OrderDetails, and Products tables.  The result of your query should include the
@@ -28,10 +29,10 @@ SUM(Quantity) AS TotalQuantity and you must GROUP BY CustomerID, ProductID.  Pas
 SQL statement below.
 
 SELECT CustomerName, ProductName, SUM(od.Quantity) AS TotalQuantity 
-FROM Products AS p 
-JOIN orderDetails AS od ON p.ProductID=od.ProductID 
-JOIN orders AS o  ON o.orderID=od.orderID 
-JOIN Customers AS c on c.CustomerID = o.CustomerID 
+FROM Customers AS c 
+JOIN orders AS o ON c.CustomerID=o.CustomerID 
+JOIN orderDetails AS od ON o.orderID=od.orderID
+JOIN Products AS p ON p.ProductID=od.ProductID
 GROUP BY c.CustomerID, p.ProductID;
 
 4. Extend the previous query to give the total price as well as the customer name, product name, 
@@ -56,11 +57,11 @@ VALUES (90, 5, "7/9/1996 ", 2);
 you will have to specify the ID of an existing product.  Paste your SQL statement below.
 
 INSERT INTO OrderDetails ("OrderID", "ProductID", "Quantity") 
-VALUES (10445, 5, 8), (10444, 8, 2), (10443, 1, 1);
+VALUES (10445, 5, 8), (10445, 8, 2), (10445, 1, 1);;
 
 7.  Delete the third of the OrderDetails you just added.  Paste your SQL statement below.
 
-DELETE FROM OrderDetails WHERE OrderDetailID=519;
+DELETE FROM OrderDetails WHERE OrderDetailID=521;
 
 8. Update the Price Table, so that every product with a price less than $20 has the price increased by
 0.50.  Paste your SQL statement below.
